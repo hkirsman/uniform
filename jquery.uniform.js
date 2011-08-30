@@ -154,8 +154,7 @@ Enjoy!
     function doSelect(elem){
      
       var divTag = $('<div />'),
-          spanTag = $('<span />'),
-     	  origElemWidth = elem.width();
+          spanTag = $('<span />');
 
 	  if(!elem.css("display") == "none" && options.autoHide){
         divTag.hide();
@@ -182,10 +181,7 @@ Enjoy!
       spanTag = elem.siblings("span");
 
       if(options.selectAutoWidth) {
-				var padding = parseInt(divTag.css("paddingLeft"), 10);
-       	//$el.css('width', (origElemWidth)+'px');
-        //divTag.css('width', (origElemWidth) + 'px');
-        spanTag.css('width', (origElemWidth-padding-15) + 'px');
+        elem.css('width', divTag.outerWidth());
       }
 
       elem.bind({
