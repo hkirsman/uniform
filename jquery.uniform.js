@@ -41,7 +41,7 @@ Enjoy!
       idPrefix: 'uniform',
       resetSelector: false,
       autoHide: true,
-      selectAutoWidth: false
+      selectAutoWidth: true
     },
     elements: []
   };
