@@ -91,7 +91,7 @@ Enjoy!
       var btnText;
       
       if($el.is("a") || $el.is("button")){
-        btnText = $el.text();
+        btnText = $el.html();
       }else if($el.is(":submit") || $el.is(":reset") || $el.is("input[type=button]")){
         btnText = $el.attr("value");
       }
@@ -156,7 +156,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
 
-	  if(!elem.css("display") == "none" && options.autoHide){
+      if(!elem.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
@@ -186,7 +186,7 @@ Enjoy!
 
       elem.bind({
         "change.uniform": function() {
-          spanTag.text(elem.find(":selected").html());
+          spanTag.html(elem.find(":selected").html());
           divTag.removeClass(options.activeClass);
         },
         "focus.uniform": function() {
@@ -213,7 +213,7 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         },
         "keyup.uniform": function(){
-          spanTag.text(elem.find(":selected").html());
+          spanTag.html(elem.find(":selected").html());
         }
       });
       
@@ -428,7 +428,7 @@ Enjoy!
           filename = filename.split(/[\/\\]+/);
           filename = filename[(filename.length-1)];
         }
-        filenameTag.text(filename);
+        filenameTag.html(filename);
       };
 
       // Account for input saved across refreshes
@@ -618,7 +618,7 @@ Enjoy!
 
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
 
-          filenameTag.text($e.val());
+          filenameTag.html($e.val());
 
           if($e.is(":disabled")){
             divTag.addClass(options.disabledClass);
