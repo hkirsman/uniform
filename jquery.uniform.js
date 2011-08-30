@@ -41,7 +41,7 @@ Enjoy!
       idPrefix: 'uniform',
       resetSelector: false,
       autoHide: true,
-	  selectAutoWidth: false
+      selectAutoWidth: false
     },
     elements: []
   };
@@ -152,13 +152,12 @@ Enjoy!
     }
 
     function doSelect(elem){
-      var $el = $(elem);
-      
+     
       var divTag = $('<div />'),
           spanTag = $('<span />'),
-     	  origElemWidth = $el.width();
+     	  origElemWidth = elem.width();
 
-	  if(!$el.css("display") == "none" && options.autoHide){
+	  if(!elem.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
@@ -168,19 +167,19 @@ Enjoy!
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
       
-      var selected = $el.find(":selected:first");
+      var selected = elem.find(":selected:first");
       if(selected.length == 0){
-        selected = $el.find("option:first");
+        selected = elem.find("option:first");
       }
       spanTag.html(selected.html());
       
-      $el.css('opacity', 0);
-      $el.wrap(divTag);
-      $el.before(spanTag);
+      elem.css('opacity', 0);
+      elem.wrap(divTag);
+      elem.before(spanTag);
 			
       //redefine variables
-      divTag = $el.parent("div");
-      spanTag = $el.siblings("span");
+      divTag = elem.parent("div");
+      spanTag = elem.siblings("span");
 
       if(options.selectAutoWidth) {
 				var padding = parseInt(divTag.css("paddingLeft"), 10);
@@ -189,9 +188,9 @@ Enjoy!
         spanTag.css('width', (origElemWidth-padding-15) + 'px');
       }
 
-      $el.bind({
+      elem.bind({
         "change.uniform": function() {
-          spanTag.text($el.find(":selected").html());
+          spanTag.text(elem.find(":selected").html());
           divTag.removeClass(options.activeClass);
         },
         "focus.uniform": function() {
@@ -218,18 +217,18 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         },
         "keyup.uniform": function(){
-          spanTag.text($el.find(":selected").html());
+          spanTag.text(elem.find(":selected").html());
         }
       });
       
       //handle disabled state
-      if($el.attr("disabled")){
+      if(elem.attr("disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
       $.uniform.noSelect(spanTag);
       
-      storeElement($el);
+      storeElement(elem);
     }
 
     function doCheckbox(elem){
