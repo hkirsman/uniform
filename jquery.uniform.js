@@ -577,6 +577,10 @@ Enjoy!
             divTag.removeClass(options.disabledClass);
           }
 
+          if(options.selectAutoWidth) {
+            $e.css('width', divTag.outerWidth());
+          }
+
         }else if($e.is(":checkbox")){
           //element is a checkbox
           var spanTag = $e.closest("span");
