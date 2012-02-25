@@ -66,50 +66,50 @@ Enjoy!
         setTimeout(resetThis, 10);
       });
     }
-    
+
     function doInput(elem){
       $el = $(elem);
       $el.addClass($el.attr("type"));
       storeElement(elem);
     }
-    
+
     function doTextarea(elem){
       $(elem).addClass("uniform");
       storeElement(elem);
     }
-    
+
     function doButton(elem){
       var $el = $(elem);
-      
+
       var divTag = $("<div>"),
           spanTag = $("<span>");
-      
+
       divTag.addClass(options.buttonClass);
-      
+
       if(options.useID && $el.attr("id") != "") divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
-      
+
       var btnText;
-      
+
       if($el.is("a") || $el.is("button")){
         btnText = $el.html();
       }else if($el.is(":submit") || $el.is(":reset") || $el.is("input[type=button]")){
         btnText = $el.attr("value");
       }
-      
+
       btnText = btnText == "" ? $el.is(":reset") ? "Reset" : "Submit" : btnText;
-      
+
       spanTag.html(btnText);
-      
+
       $el.css("opacity", 0);
       $el.wrap(divTag);
       $el.wrap(spanTag);
-      
+
       //redefine variables
       divTag = $el.closest("div");
       spanTag = $el.closest("span");
-      
+
       if($el.is(":disabled")) divTag.addClass(options.disabledClass);
-      
+
       divTag.bind({
         "mouseenter.uniform": function(){
           divTag.addClass(options.hoverClass);
@@ -125,7 +125,7 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         },
         "click.uniform touchend.uniform": function(e){
-          if($(e.target).is("span") || $(e.target).is("div")){    
+          if($(e.target).is("span") || $(e.target).is("div")){
             if(elem[0].dispatchEvent){
               var ev = document.createEvent('MouseEvents');
               ev.initEvent( 'click', true, true );
@@ -136,7 +136,7 @@ Enjoy!
           }
         }
       });
-      
+
       elem.bind({
         "focus.uniform": function(){
           divTag.addClass(options.focusClass);
@@ -145,14 +145,14 @@ Enjoy!
           divTag.removeClass(options.focusClass);
         }
       });
-      
+
       $.uniform.noSelect(divTag);
       storeElement(elem);
-      
+
     }
 
     function doSelect(elem){
-     
+
       var divTag = $('<div />'),
           spanTag = $('<span />');
 
@@ -165,17 +165,17 @@ Enjoy!
       if(options.useID && elem.attr("id") != ""){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
-      
+
       var selected = elem.find(":selected:first");
       if(selected.length == 0){
         selected = elem.find("option:first");
       }
       spanTag.html(selected.html());
-      
+
       elem.css('opacity', 0);
       elem.wrap(divTag);
       elem.before(spanTag);
-			
+
       //redefine variables
       divTag = elem.parent("div");
       spanTag = elem.siblings("span");
@@ -216,27 +216,27 @@ Enjoy!
           spanTag.html(elem.find(":selected").html());
         }
       });
-      
+
       //handle disabled state
-      if(elem.attr("disabled")){
+      if(elem.prop("disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
       $.uniform.noSelect(spanTag);
-      
+
       storeElement(elem);
     }
 
     function doCheckbox(elem){
       var $el = $(elem);
-      
+
       var divTag = $('<div />'),
           spanTag = $('<span />');
-      
+
       if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
-      
+
       divTag.addClass(options.checkboxClass);
 
       //assign the id of the element
@@ -263,7 +263,7 @@ Enjoy!
           divTag.removeClass(options.focusClass);
         },
         "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
+          if(!$(elem).prop("checked")){
             //box was just unchecked, uncheck span
             spanTag.removeClass(options.checkedClass);
           }else{
@@ -285,15 +285,15 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         }
       });
-      
+
       //handle defaults
-      if($(elem).attr("checked")){
+      if($(elem).prop("checked")){
         //box is checked by default, check our box
         spanTag.addClass(options.checkedClass);
       }
 
       //handle disabled state
-      if($(elem).attr("disabled")){
+      if($(elem).prop("disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -303,10 +303,10 @@ Enjoy!
 
     function doRadio(elem){
       var $el = $(elem);
-      
+
       var divTag = $('<div />'),
           spanTag = $('<span />');
-          
+
       if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
@@ -336,7 +336,7 @@ Enjoy!
           divTag.removeClass(options.focusClass);
         },
         "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
+          if(!$(elem).prop("checked")){
             //box was just unchecked, uncheck span
             spanTag.removeClass(options.checkedClass);
           }else{
@@ -364,12 +364,12 @@ Enjoy!
       });
 
       //handle defaults
-      if($(elem).attr("checked")){
+      if($(elem).prop("checked")){
         //box is checked by default, check span
         spanTag.addClass(options.checkedClass);
       }
       //handle disabled state
-      if($(elem).attr("disabled")){
+      if($(elem).prop("disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -385,7 +385,7 @@ Enjoy!
       var divTag = $('<div />'),
           filenameTag = $('<span>'+options.fileDefaultText+'</span>'),
           btnTag = $('<span>'+options.fileBtnText+'</span>');
-      
+
       if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
@@ -473,23 +473,23 @@ Enjoy!
       }
 
       //handle defaults
-      if($el.attr("disabled")){
+      if($el.prop("disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
-      
+
       $.uniform.noSelect(filenameTag);
       $.uniform.noSelect(btnTag);
-      
+
       storeElement(elem);
 
     }
-    
+
     $.uniform.restore = function(elem){
       if(elem == undefined){
         elem = $($.uniform.elements);
       }
-      
+
       $(elem).each(function(){
         if($(this).is(":checkbox")){
           //unwrap from span and div
@@ -511,13 +511,13 @@ Enjoy!
           //unwrap from span and div
           $(this).unwrap().unwrap();
         }
-        
+
         //unbind events
         $(this).unbind(".uniform");
-        
+
         //reset inline style
         $(this).css("opacity", "1");
-        
+
         //remove item from list of uniformed elements
         var index = $.inArray($(elem), $.uniform.elements);
         $.uniform.elements.splice(index, 1);
@@ -535,7 +535,7 @@ Enjoy!
         $.uniform.elements.push(elem);
       }
     }
-    
+
     //noSelect v1.0
     $.uniform.noSelect = function(elem) {
       function f() {
@@ -632,15 +632,15 @@ Enjoy!
         }else if($e.is(":submit") || $e.is(":reset") || $e.is("button") || $e.is("a") || elem.is("input[type=button]")){
           var divTag = $e.closest("div");
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
-          
+
           if($e.is(":disabled")){
             divTag.addClass(options.disabledClass);
           }else{
             divTag.removeClass(options.disabledClass);
           }
-          
+
         }
-        
+
       });
     };
 
@@ -672,7 +672,7 @@ Enjoy!
         }else if(elem.is("a") || elem.is(":submit") || elem.is(":reset") || elem.is("button") || elem.is("input[type=button]")){
           doButton(elem);
         }
-          
+
       }
     });
   };
